@@ -20,13 +20,19 @@ function TopHeaderActions() {
   );
 }
 
+function TopHeaderGreeting() {
+  return (
+    <div>
+      <p className="text-sm text-indigo-100">Good Morning,</p>
+      <h1 className="text-2xl font-semibold tracking-tight">Samuel Walker!</h1>
+    </div>
+  );
+}
+
 function TopHeader() {
   return (
     <header className="flex items-center justify-between mb-8">
-      <div>
-        <p className="text-sm text-indigo-100">Good Morning,</p>
-        <h1 className="text-2xl font-semibold tracking-tight">Samuel Walker!</h1>
-      </div>
+      <TopHeaderGreeting />
       <TopHeaderActions />
     </header>
   );

@@ -18,42 +18,34 @@ function App() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    let isMounted = true
-
     async function load() {
       try {
         const data = await fetchTournaments()
-        if (!isMounted) return
         setTournaments(data)
       } catch (e) {
-        if (!isMounted) return
         setError('Impossible de charger les tournois.')
         console.error(e)
       } finally {
-        if (isMounted) setLoading(false)
+        setLoading(false)
       }
     }
 
     load()
-    return () => {
-      isMounted = false
-    }
   }, [])
 
-  const sportsFilters = useMemo(() => {
-    const sports = new Set(tournaments.map((t) => t.sport))
-    return [SPORTS_FILTER_ALL, ...Array.from(sports)]
-  }, [tournaments])
+  const sports = new Set(tournaments.map((t) => t.sport));
+  const sportsFilters = [SPORTS_FILTER_ALL, ...Array.from(sports)];
 
-  const filteredTournaments = useMemo(() => {
-    const bySport = filterBySport(
-      tournaments,
-      selectedSport === SPORTS_FILTER_ALL ? null : selectedSport,
-    )
-    if (!searchQuery.trim()) return bySport
-    const q = searchQuery.toLowerCase()
-    return bySport.filter((t) => t.title.toLowerCase().includes(q))
-  }, [tournaments, selectedSport, searchQuery])
+  let bySport = filterBySport(
+    tournaments,
+    selectedSport === SPORTS_FILTER_ALL ? null : selectedSport
+  );
+
+  let filteredTournaments = bySport;
+  if (searchQuery.trim()) {
+    const q = searchQuery.toLowerCase();
+    filteredTournaments = bySport.filter((t) => t.title.toLowerCase().includes(q));
+  }
 
   return (
     <Routes>

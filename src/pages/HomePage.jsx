@@ -56,10 +56,11 @@ function SportsFilterList(props) {
       {sportsFilters.map((sport) => {
         let btnClass = "flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium border ";
         if (selectedSport === sport) {
-          btnClass += "bg-white text-primary-dark border-white shadow-soft";
+          btnClass = btnClass + "bg-white text-primary-dark border-white shadow-soft";
         } else {
-          btnClass += "bg-white/10 text-indigo-100 border-white/20";
+          btnClass = btnClass + "bg-white/10 text-indigo-100 border-white/20";
         }
+
         return (
           <button
             key={sport}

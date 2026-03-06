@@ -7,6 +7,11 @@ import TournamentPage from './pages/TournamentPage'
 
 const SPORTS_FILTER_ALL = 'All'
 
+function matchTournamentTitle(tournament, query) {
+  const titleLower = tournament.title.toLowerCase();
+  return titleLower.includes(query);
+}
+
 function App() {
   const [tournaments, setTournaments] = useState([])
   const [loading, setLoading] = useState(true)
@@ -47,10 +52,7 @@ function App() {
     let filtered = bySport;
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      filtered = bySport.filter((t) => {
-        const titleLower = t.title.toLowerCase();
-        return titleLower.includes(q);
-      });
+      filtered = bySport.filter((t) => matchTournamentTitle(t, q));
     }
     return filtered;
   }, [tournaments, selectedSport, searchQuery]);

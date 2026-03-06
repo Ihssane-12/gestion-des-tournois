@@ -101,30 +101,35 @@ function TournamentPage({ tournaments, loading, error }) {
 
           <TabSystem activeTab={activeTab} onChange={setActiveTab} />
 
-          {activeTab === 'info' && (
-            <div className="p-5 text-sm text-slate-700">
-              <p className="mb-4">{tournament.description}</p>
-            </div>
-          )}
-
-          {activeTab === 'participants' && (
-            <div className="p-5">
-              <h3 className="text-sm font-semibold text-slate-900 mb-3">
-                Participants List ({tournament.participants.length})
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                {tournament.participants.map((player) => (
-                  <ParticipantRow key={player.id} player={player} />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'bracket' && (
-            <div className="p-5 text-sm text-slate-700">
-              <p>Bracket visualization coming soon.</p>
-            </div>
-          )}
+          {(() => {
+            if (activeTab === 'info') {
+              return (
+                <div className="p-5 text-sm text-slate-700">
+                  <p className="mb-4">{tournament.description}</p>
+                </div>
+              );
+            } else if (activeTab === 'participants') {
+              return (
+                <div className="p-5">
+                  <h3 className="text-sm font-semibold text-slate-900 mb-3">
+                    Participants List ({tournament.participants.length})
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {tournament.participants.map((player) => (
+                      <ParticipantRow key={player.id} player={player} />
+                    ))}
+                  </div>
+                </div>
+              );
+            } else if (activeTab === 'bracket') {
+              return (
+                <div className="p-5 text-sm text-slate-700">
+                  <p>Bracket visualization coming soon.</p>
+                </div>
+              );
+            }
+            return null;
+          })()}
         </div>
       </div>
     </div>

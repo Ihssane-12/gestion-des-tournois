@@ -42,10 +42,10 @@ function TournamentCard(props) {
           <span>-</span>
           <span>{tournament.type}</span>
         </span>
-        <div className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
+        <span className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
           <span>🔁</span>
           <span>{tournament.format}</span>
-        </div>
+        </span>
         <div className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
           <span>📅</span>
           <span>{tournament.date}</span>

@@ -122,6 +122,20 @@ function BracketTab() {
   );
 }
 
+function TabContent(props) {
+  const activeTab = props.activeTab;
+  const tournament = props.tournament;
+
+  if (activeTab === 'info') {
+    return <InfoTab tournament={tournament} />;
+  } else if (activeTab === 'participants') {
+    return <ParticipantListTab tournament={tournament} />;
+  } else if (activeTab === 'bracket') {
+    return <BracketTab />;
+  }
+  return null;
+}
+
 function TournamentPage({ tournaments, loading, error }) {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -166,16 +180,7 @@ function TournamentPage({ tournaments, loading, error }) {
 
           <TabSystem activeTab={activeTab} onChange={setActiveTab} />
 
-          {(() => {
-            if (activeTab === 'info') {
-              return <InfoTab tournament={tournament} />;
-            } else if (activeTab === 'participants') {
-              return <ParticipantListTab tournament={tournament} />;
-            } else if (activeTab === 'bracket') {
-              return <BracketTab />;
-            }
-            return null;
-          })()}
+          <TabContent activeTab={activeTab} tournament={tournament} />
         </div>
       </div>
     </div>

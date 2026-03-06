@@ -104,6 +104,16 @@ function TournamentNotFound() {
   );
 }
 
+function InfoTab(props) {
+  const tournament = props.tournament;
+
+  return (
+    <div className="p-5 text-sm text-slate-700">
+      <p className="mb-4">{tournament.description}</p>
+    </div>
+  );
+}
+
 function BracketTab() {
   return (
     <div className="p-5 text-sm text-slate-700">
@@ -158,11 +168,7 @@ function TournamentPage({ tournaments, loading, error }) {
 
           {(() => {
             if (activeTab === 'info') {
-              return (
-                <div className="p-5 text-sm text-slate-700">
-                  <p className="mb-4">{tournament.description}</p>
-                </div>
-              );
+              return <InfoTab tournament={tournament} />;
             } else if (activeTab === 'participants') {
               return <ParticipantListTab tournament={tournament} />;
             } else if (activeTab === 'bracket') {

@@ -53,6 +53,23 @@ function TournamentBadges(props) {
   );
 }
 
+function ParticipantListTab(props) {
+  const tournament = props.tournament;
+
+  return (
+    <div className="p-5">
+      <h3 className="text-sm font-semibold text-slate-900 mb-3">
+        Participants List ({tournament.participants.length})
+      </h3>
+      <div className="grid grid-cols-2 gap-3">
+        {tournament.participants.map((player) => (
+          <ParticipantRow key={player.id} player={player} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function TournamentPage({ tournaments, loading, error }) {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -125,18 +142,7 @@ function TournamentPage({ tournaments, loading, error }) {
                 </div>
               );
             } else if (activeTab === 'participants') {
-              return (
-                <div className="p-5">
-                  <h3 className="text-sm font-semibold text-slate-900 mb-3">
-                    Participants List ({tournament.participants.length})
-                  </h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    {tournament.participants.map((player) => (
-                      <ParticipantRow key={player.id} player={player} />
-                    ))}
-                  </div>
-                </div>
-              );
+              return <ParticipantListTab tournament={tournament} />;
             } else if (activeTab === 'bracket') {
               return (
                 <div className="p-5 text-sm text-slate-700">
@@ -153,4 +159,3 @@ function TournamentPage({ tournaments, loading, error }) {
 }
 
 export default TournamentPage
-

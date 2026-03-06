@@ -104,6 +104,14 @@ function TournamentNotFound() {
   );
 }
 
+function BracketTab() {
+  return (
+    <div className="p-5 text-sm text-slate-700">
+      <p>Bracket visualization coming soon.</p>
+    </div>
+  );
+}
+
 function TournamentPage({ tournaments, loading, error }) {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -158,11 +166,7 @@ function TournamentPage({ tournaments, loading, error }) {
             } else if (activeTab === 'participants') {
               return <ParticipantListTab tournament={tournament} />;
             } else if (activeTab === 'bracket') {
-              return (
-                <div className="p-5 text-sm text-slate-700">
-                  <p>Bracket visualization coming soon.</p>
-                </div>
-              );
+              return <BracketTab />;
             }
             return null;
           })()}

@@ -1,15 +1,22 @@
 import StatusBadge from './StatusBadge'
 
-function TournamentCard({ tournament, active, onSelect }) {
+function TournamentCard(props) {
+  const tournament = props.tournament;
+  const active = props.active;
+  const onSelect = props.onSelect;
+
+  let cardClass = "w-full text-left bg-white rounded-3xl p-4 md:p-5 border transition-all ";
+  if (active) {
+    cardClass += "border-white/90 shadow-soft";
+  } else {
+    cardClass += "border-white/70 shadow-sm hover:border-white hover:shadow-soft";
+  }
+
   return (
     <button
       type="button"
       onClick={onSelect}
-      className={`w-full text-left bg-white rounded-3xl p-4 md:p-5 border transition-all ${
-        active
-          ? 'border-white/90 shadow-soft'
-          : 'border-white/70 shadow-sm hover:border-white hover:shadow-soft'
-      }`}
+      className={cardClass}
     >
       <div className="flex justify-between items-start gap-3 mb-3">
         <div className="flex items-center gap-3">

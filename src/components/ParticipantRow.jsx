@@ -13,31 +13,38 @@ function ParticipantRow(props) {
     dotClass = 'bg-emerald-500';
   }
 
+  let avatarElement = <div className="h-full w-full bg-gradient-to-tr from-amber-400 via-rose-400 to-fuchsia-500" />;
+  if (player.avatar) {
+    avatarElement = (
+      <img
+        src={player.avatar}
+        alt={player.name}
+        className="h-full w-full object-cover"
+      />
+    );
+  }
+
+  let rankText = 'Participant';
+  if (player.rank) {
+    rankText = 'Seed ' + player.rank;
+  }
+
+  let finalChipClass = "inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium " + chipClass;
+  let finalDotClass = "h-1.5 w-1.5 rounded-full " + dotClass;
+
   return (
     <div className="flex items-center gap-3 bg-slate-50 rounded-2xl px-3 py-2.5 border border-slate-100">
       <div className="h-9 w-9 rounded-full overflow-hidden bg-slate-200 flex-shrink-0">
-        {player.avatar ? (
-          <img
-            src={player.avatar}
-            alt={player.name}
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <div className="h-full w-full bg-gradient-to-tr from-amber-400 via-rose-400 to-fuchsia-500" />
-        )}
+        {avatarElement}
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-slate-900 truncate">{player.name}</p>
         <p className="text-[11px] text-slate-500 truncate">
-          {player.rank ? `Seed ${player.rank}` : 'Participant'}
+          {rankText}
         </p>
       </div>
-      <span
-        className={"inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium " + chipClass}
-      >
-        <span
-          className={"h-1.5 w-1.5 rounded-full " + dotClass}
-        />
+      <span className={finalChipClass}>
+        <span className={finalDotClass} />
         {badgeStatus}
       </span>
     </div>

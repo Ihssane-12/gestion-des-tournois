@@ -1,6 +1,8 @@
 import TournamentCard from '../components/TournamentCard'
 
 function TopHeader() {
+  let imgClass = "h-full w-full object-cover";
+
   return (
     <header className="flex items-center justify-between mb-8">
       <div>
@@ -16,7 +18,7 @@ function TopHeader() {
           <img
             src="https://i.pravatar.cc/150?img=12"
             alt="Profile"
-            className="h-full w-full object-cover"
+            className={imgClass}
           />
         </div>
       </div>

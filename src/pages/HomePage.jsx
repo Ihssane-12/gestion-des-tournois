@@ -96,6 +96,24 @@ function TournamentSkeleton() {
   );
 }
 
+function TournamentList(props) {
+  const filteredTournaments = props.filteredTournaments;
+  const onOpenTournament = props.onOpenTournament;
+
+  return (
+    <div className="space-y-4">
+      {filteredTournaments.map((tournament) => (
+        <TournamentCard
+          key={tournament.id}
+          tournament={tournament}
+          active={false}
+          onSelect={() => onOpenTournament(tournament.id)}
+        />
+      ))}
+    </div>
+  );
+}
+
 function HomePage({
   loading,
   error,
@@ -127,16 +145,10 @@ function HomePage({
             {error}
           </div>
         ) : (
-          <div className="space-y-4">
-            {filteredTournaments.map((tournament) => (
-              <TournamentCard
-                key={tournament.id}
-                tournament={tournament}
-                active={false}
-                onSelect={() => onOpenTournament(tournament.id)}
-              />
-            ))}
-          </div>
+          <TournamentList
+            filteredTournaments={filteredTournaments}
+            onOpenTournament={onOpenTournament}
+          />
         )}
       </div>
     </div>

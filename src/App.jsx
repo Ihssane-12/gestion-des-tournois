@@ -36,16 +36,19 @@ function App() {
   const sports = new Set(tournaments.map((t) => t.sport));
   const sportsFilters = [SPORTS_FILTER_ALL, ...Array.from(sports)];
 
-  let bySport = filterBySport(
-    tournaments,
-    selectedSport === SPORTS_FILTER_ALL ? null : selectedSport
-  );
+  const filteredTournaments = useMemo(() => {
+    let bySport = filterBySport(
+      tournaments,
+      selectedSport === SPORTS_FILTER_ALL ? null : selectedSport
+    );
 
-  let filteredTournaments = bySport;
-  if (searchQuery.trim()) {
-    const q = searchQuery.toLowerCase();
-    filteredTournaments = bySport.filter((t) => t.title.toLowerCase().includes(q));
-  }
+    let filtered = bySport;
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      filtered = bySport.filter((t) => t.title.toLowerCase().includes(q));
+    }
+    return filtered;
+  }, [tournaments, selectedSport, searchQuery]);
 
   return (
     <Routes>

@@ -4,6 +4,25 @@ import StatusBadge from '../components/StatusBadge'
 import TabSystem from '../components/TabSystem'
 import ParticipantRow from '../components/ParticipantRow'
 
+function TournamentHeader(props) {
+  const navigate = props.navigate;
+
+  return (
+    <header className="flex items-center justify-between px-4 mb-5">
+      <button
+        onClick={() => navigate(-1)}
+        className="h-9 w-9 rounded-full bg-primary-light/30 flex items-center justify-center text-white shadow-soft"
+      >
+        <i className="fa-solid fa-arrow-left" />
+      </button>
+      <p className="text-sm font-medium">Tournament</p>
+      <button className="h-9 w-9 rounded-full bg-primary-light/30 flex items-center justify-center text-white shadow-soft">
+        <i className="fa-solid fa-share-nodes" />
+      </button>
+    </header>
+  );
+}
+
 function TournamentPage({ tournaments, loading, error }) {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -46,18 +65,7 @@ function TournamentPage({ tournaments, loading, error }) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary-dark via-primary to-slate-900 text-slate-50">
       <div className="max-w-md mx-auto pt-8 pb-24">
-        <header className="flex items-center justify-between px-4 mb-5">
-          <button
-            onClick={() => navigate(-1)}
-            className="h-9 w-9 rounded-full bg-primary-light/30 flex items-center justify-center text-white shadow-soft"
-          >
-            <i className="fa-solid fa-arrow-left" />
-          </button>
-          <p className="text-sm font-medium">Tournament</p>
-          <button className="h-9 w-9 rounded-full bg-primary-light/30 flex items-center justify-center text-white shadow-soft">
-            <i className="fa-solid fa-share-nodes" />
-          </button>
-        </header>
+        <TournamentHeader navigate={navigate} />
 
         <div className="mx-4 bg-white rounded-4xl shadow-soft text-slate-900 overflow-hidden">
           <div className="bg-gradient-to-br from-primary via-primary-light to-sky-400 p-5 pb-6 text-white">

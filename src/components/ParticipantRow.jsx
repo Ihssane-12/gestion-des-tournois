@@ -1,18 +1,17 @@
 import StatusBadge from './StatusBadge'
 
-const PLAYER_STATUS_STYLES = {
-  Confirmed: {
-    badgeStatus: 'Confirmed',
-    chipClass: 'bg-emerald-50 text-emerald-700',
-  },
-  Pending: {
-    badgeStatus: 'Pending',
-    chipClass: 'bg-amber-50 text-amber-700',
-  },
-}
+function ParticipantRow(props) {
+  const player = props.player;
 
-function ParticipantRow({ player }) {
-  const style = PLAYER_STATUS_STYLES[player.status] ?? PLAYER_STATUS_STYLES.Pending
+  let badgeStatus = 'Pending';
+  let chipClass = 'bg-amber-50 text-amber-700';
+  let dotClass = 'bg-amber-500';
+
+  if (player.status === 'Confirmed') {
+    badgeStatus = 'Confirmed';
+    chipClass = 'bg-emerald-50 text-emerald-700';
+    dotClass = 'bg-emerald-500';
+  }
 
   return (
     <div className="flex items-center gap-3 bg-slate-50 rounded-2xl px-3 py-2.5 border border-slate-100">
@@ -34,14 +33,12 @@ function ParticipantRow({ player }) {
         </p>
       </div>
       <span
-        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium ${style.chipClass}`}
+        className={"inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium " + chipClass}
       >
         <span
-          className={`h-1.5 w-1.5 rounded-full ${
-            player.status === 'Confirmed' ? 'bg-emerald-500' : 'bg-amber-500'
-          }`}
+          className={"h-1.5 w-1.5 rounded-full " + dotClass}
         />
-        {style.badgeStatus}
+        {badgeStatus}
       </span>
     </div>
   )

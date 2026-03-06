@@ -9,8 +9,8 @@ module.exports = {
           light: '#818CF8',   // Indigo-400
           dark: '#4F46E5',    // Indigo-600
         },
-        accent: '#FFB457',
-        success: '#22C55E',
+        accent: '#F59E0B', // Amber-500
+        success: '#10B981', // Emerald-500
         warning: '#F97316',
       },
       borderRadius: {

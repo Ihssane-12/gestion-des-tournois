@@ -94,6 +94,16 @@ function TournamentError(props) {
   );
 }
 
+function TournamentNotFound() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-primary-dark via-primary to-slate-900 text-slate-50">
+      <div className="max-w-md mx-auto pt-8 pb-24">
+        <div className="mx-4 text-center text-sm text-slate-100 mt-10">Tournament not found.</div>
+      </div>
+    </div>
+  );
+}
+
 function TournamentPage({ tournaments, loading, error }) {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -110,13 +120,7 @@ function TournamentPage({ tournaments, loading, error }) {
   }
 
   if (!tournament) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-primary-dark via-primary to-slate-900 text-slate-50">
-        <div className="max-w-md mx-auto pt-8 pb-24">
-          <div className="mx-4 text-center text-sm text-slate-100 mt-10">Tournament not found.</div>
-        </div>
-      </div>
-    );
+    return <TournamentNotFound />;
   }
 
   return (

@@ -33,8 +33,10 @@ function App() {
     load()
   }, [])
 
-  const sports = new Set(tournaments.map((t) => t.sport));
-  const sportsFilters = [SPORTS_FILTER_ALL, ...Array.from(sports)];
+  const sportsFilters = useMemo(() => {
+    const sports = new Set(tournaments.map((t) => t.sport));
+    return [SPORTS_FILTER_ALL, ...Array.from(sports)];
+  }, [tournaments]);
 
   const filteredTournaments = useMemo(() => {
     let bySport = filterBySport(

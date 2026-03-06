@@ -24,6 +24,28 @@ function TopHeader() {
   );
 }
 
+function SearchBar(props) {
+  const searchQuery = props.searchQuery;
+  const onChangeSearch = props.onChangeSearch;
+
+  return (
+    <div className="mb-6">
+      <div className="relative">
+        <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 text-sm">
+          <i className="fa-solid fa-magnifying-glass" />
+        </span>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => onChangeSearch(e.target.value)}
+          placeholder="Search"
+          className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white/10 border border-white/15 text-sm placeholder:text-slate-300 text-white focus:outline-none focus:ring-2 focus:ring-white/60"
+        />
+      </div>
+    </div>
+  );
+}
+
 function HomePage({
   loading,
   error,
@@ -40,20 +62,7 @@ function HomePage({
       <div className="max-w-md mx-auto px-4 pt-8 pb-24">
         <TopHeader />
 
-        <div className="mb-6">
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 text-sm">
-              <i className="fa-solid fa-magnifying-glass" />
-            </span>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => onChangeSearch(e.target.value)}
-              placeholder="Search"
-              className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white/10 border border-white/15 text-sm placeholder:text-slate-300 text-white focus:outline-none focus:ring-2 focus:ring-white/60"
-            />
-          </div>
-        </div>
+        <SearchBar searchQuery={searchQuery} onChangeSearch={onChangeSearch} />
 
         <div className="mb-5 flex gap-2 overflow-x-auto pb-1">
           {sportsFilters.map((sport) => {

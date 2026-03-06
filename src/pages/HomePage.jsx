@@ -1,5 +1,29 @@
 import TournamentCard from '../components/TournamentCard'
 
+function TopHeader() {
+  return (
+    <header className="flex items-center justify-between mb-8">
+      <div>
+        <p className="text-sm text-indigo-100">Good Morning,</p>
+        <h1 className="text-2xl font-semibold tracking-tight">Samuel Walker!</h1>
+      </div>
+      <div className="flex items-center gap-3">
+        <button className="h-10 w-10 rounded-full bg-primary-light/40 flex items-center justify-center text-white shadow-soft">
+          <span className="sr-only">Notifications</span>
+          <i className="fa-solid fa-bell text-sm" />
+        </button>
+        <div className="h-10 w-10 rounded-full overflow-hidden border-2 border-white/40">
+          <img
+            src="https://i.pravatar.cc/150?img=12"
+            alt="Profile"
+            className="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </header>
+  );
+}
+
 function HomePage({
   loading,
   error,
@@ -14,25 +38,7 @@ function HomePage({
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary-dark via-primary to-slate-900 text-slate-50">
       <div className="max-w-md mx-auto px-4 pt-8 pb-24">
-        <header className="flex items-center justify-between mb-8">
-          <div>
-            <p className="text-sm text-indigo-100">Good Morning,</p>
-            <h1 className="text-2xl font-semibold tracking-tight">Samuel Walker!</h1>
-          </div>
-          <div className="flex items-center gap-3">
-            <button className="h-10 w-10 rounded-full bg-primary-light/40 flex items-center justify-center text-white shadow-soft">
-              <span className="sr-only">Notifications</span>
-              <i className="fa-solid fa-bell text-sm" />
-            </button>
-            <div className="h-10 w-10 rounded-full overflow-hidden border-2 border-white/40">
-              <img
-                src="https://i.pravatar.cc/150?img=12"
-                alt="Profile"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-        </header>
+        <TopHeader />
 
         <div className="mb-6">
           <div className="relative">

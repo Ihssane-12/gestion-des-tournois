@@ -1,5 +1,32 @@
 import StatusBadge from './StatusBadge'
 
+function TournamentCardDetails(props) {
+  const tournament = props.tournament;
+
+  return (
+    <div className="flex flex-wrap gap-2 text-[11px] text-slate-600">
+      <span className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
+        <span>👥</span>
+        <span>{tournament.participantsCount}</span>
+        <span>-</span>
+        <span>{tournament.type}</span>
+      </span>
+      <span className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
+        <span>🔁</span>
+        <span>{tournament.format}</span>
+      </span>
+      <span className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
+        <span>📅</span>
+        <span>{tournament.date}</span>
+      </span>
+      <span className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
+        <span>📍</span>
+        <span>{tournament.location}</span>
+      </span>
+    </div>
+  );
+}
+
 function TournamentCard(props) {
   const tournament = props.tournament;
   const active = props.active;
@@ -35,29 +62,9 @@ function TournamentCard(props) {
 
       <p className="text-xs text-slate-600 mb-4 line-clamp-2">{tournament.description}</p>
 
-      <div className="flex flex-wrap gap-2 text-[11px] text-slate-600">
-        <span className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
-          <span>👥</span>
-          <span>{tournament.participantsCount}</span>
-          <span>-</span>
-          <span>{tournament.type}</span>
-        </span>
-        <span className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
-          <span>🔁</span>
-          <span>{tournament.format}</span>
-        </span>
-        <span className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
-          <span>📅</span>
-          <span>{tournament.date}</span>
-        </span>
-        <span className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
-          <span>📍</span>
-          <span>{tournament.location}</span>
-        </span>
-      </div>
+      <TournamentCardDetails tournament={tournament} />
     </button>
   )
 }
 
 export default TournamentCard
-

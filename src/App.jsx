@@ -47,7 +47,10 @@ function App() {
     let filtered = bySport;
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      filtered = bySport.filter((t) => t.title.toLowerCase().includes(q));
+      filtered = bySport.filter((t) => {
+        const titleLower = t.title.toLowerCase();
+        return titleLower.includes(q);
+      });
     }
     return filtered;
   }, [tournaments, selectedSport, searchQuery]);

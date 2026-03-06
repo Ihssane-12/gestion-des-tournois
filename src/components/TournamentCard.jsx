@@ -27,6 +27,27 @@ function TournamentCardDetails(props) {
   );
 }
 
+function TournamentCardHeader(props) {
+  const tournament = props.tournament;
+
+  return (
+    <div className="flex justify-between items-start gap-3 mb-3">
+      <div className="flex items-center gap-3">
+        <div className="h-10 w-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl text-primary-dark">
+          🏆
+        </div>
+        <div>
+          <p className="text-[11px] text-slate-500 mb-1">{tournament.sport}</p>
+          <h2 className="text-base md:text-lg font-semibold leading-snug text-slate-900">
+            {tournament.title}
+          </h2>
+        </div>
+      </div>
+      <StatusBadge status={tournament.status} />
+    </div>
+  );
+}
+
 function TournamentCard(props) {
   const tournament = props.tournament;
   const active = props.active;
@@ -45,20 +66,7 @@ function TournamentCard(props) {
       onClick={onSelect}
       className={cardClass}
     >
-      <div className="flex justify-between items-start gap-3 mb-3">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl text-primary-dark">
-            🏆
-          </div>
-          <div>
-            <p className="text-[11px] text-slate-500 mb-1">{tournament.sport}</p>
-            <h2 className="text-base md:text-lg font-semibold leading-snug text-slate-900">
-              {tournament.title}
-            </h2>
-          </div>
-        </div>
-        <StatusBadge status={tournament.status} />
-      </div>
+      <TournamentCardHeader tournament={tournament} />
 
       <p className="text-xs text-slate-600 mb-4 line-clamp-2">{tournament.description}</p>
 

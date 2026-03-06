@@ -50,10 +50,10 @@ function TournamentCard(props) {
           <span>📅</span>
           <span>{tournament.date}</span>
         </span>
-        <div className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
+        <span className="inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-full">
           <span>📍</span>
           <span>{tournament.location}</span>
-        </div>
+        </span>
       </div>
     </button>
   )

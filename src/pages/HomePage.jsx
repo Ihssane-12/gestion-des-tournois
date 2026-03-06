@@ -51,37 +51,41 @@ function HomePage({
 
         <div className="mb-5 flex gap-2 overflow-x-auto pb-1">
           {sportsFilters.map((sport) => {
-            const isActive = selectedSport === sport
+            let btnClass = "flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium border ";
+            if (selectedSport === sport) {
+              btnClass += "bg-white text-primary-dark border-white shadow-soft";
+            } else {
+              btnClass += "bg-white/10 text-indigo-100 border-white/20";
+            }
             return (
               <button
                 key={sport}
                 onClick={() => onChangeSport(sport)}
-                className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium border ${
-                  isActive
-                    ? 'bg-white text-primary-dark border-white shadow-soft'
-                    : 'bg-white/10 text-indigo-100 border-white/20'
-                }`}
+                className={btnClass}
               >
                 {sport}
               </button>
-            )
+            );
           })}
         </div>
 
         {loading ? (
           <div className="space-y-4">
-            {[1, 2].map((s) => (
-              <div
-                key={s}
-                className="bg-white/10 rounded-3xl p-4 animate-pulse shadow-soft border border-white/10"
-              >
-                <div className="h-4 w-24 bg-white/30 rounded mb-3" />
-                <div className="h-7 w-56 bg-white/40 rounded mb-2" />
-                <div className="h-3 w-64 bg-white/30 rounded mb-4" />
-                <div className="h-3 w-40 bg-white/20 rounded mb-2" />
-                <div className="h-3 w-32 bg-white/20 rounded" />
-              </div>
-            ))}
+            <div className="bg-white/10 rounded-3xl p-4 animate-pulse shadow-soft border border-white/10">
+              <div className="h-4 w-24 bg-white/30 rounded mb-3" />
+              <div className="h-7 w-56 bg-white/40 rounded mb-2" />
+              <div className="h-3 w-64 bg-white/30 rounded mb-4" />
+              <div className="h-3 w-40 bg-white/20 rounded mb-2" />
+              <div className="h-3 w-32 bg-white/20 rounded" />
+            </div>
+
+            <div className="bg-white/10 rounded-3xl p-4 animate-pulse shadow-soft border border-white/10">
+              <div className="h-4 w-24 bg-white/30 rounded mb-3" />
+              <div className="h-7 w-56 bg-white/40 rounded mb-2" />
+              <div className="h-3 w-64 bg-white/30 rounded mb-4" />
+              <div className="h-3 w-40 bg-white/20 rounded mb-2" />
+              <div className="h-3 w-32 bg-white/20 rounded" />
+            </div>
           </div>
         ) : error ? (
           <div className="bg-red-500/20 border border-red-400/60 text-sm text-red-50 px-4 py-3 rounded-2xl">

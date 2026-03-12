@@ -1,0 +1,18 @@
+﻿2791071 HEAD@{0}: checkout: moving from main to refactor/simple-version
+49fceeb HEAD@{1}: reset: moving to origin/main
+2791071 HEAD@{2}: checkout: moving from main to main
+2791071 HEAD@{3}: commit: refactor(dataFilter): replace array filter method with a simple for loop
+91b7860 HEAD@{4}: commit: refactor(App): remove useMemo and simplify data fetch hook
+263c721 HEAD@{5}: commit: refactor(TournamentPage): simplify tab rendering logic with standard if-else
+83b3b17 HEAD@{6}: commit: refactor(TournamentPage): simplify loading/error conditional flow with early returns
+49fceeb HEAD@{7}: checkout: moving from main to main
+49fceeb HEAD@{8}: checkout: moving from refactor/simple-version to main
+81bf1eb HEAD@{9}: commit: refactor(HomePage): simplify sports filters and loading skeleton
+1268cc2 HEAD@{10}: commit: refactor(ParticipantRow): replace template strings with basic concatenations
+0c4320d HEAD@{11}: commit: refactor(TabSystem): replace mapping array with explicit buttons
+c72a92d HEAD@{12}: commit: refactor(StatusBadge): use basic if/else instead of object map
+bdcbd30 HEAD@{13}: commit: refactor(TournamentCard): simplify props and classNames formatting
+ca5db18 HEAD@{14}: commit: refactor(style): update secondary color palette
+1df4958 HEAD@{15}: commit: refactor(style): update primary color palette
+49fceeb HEAD@{16}: checkout: moving from main to refactor/simple-version
+49fceeb HEAD@{17}: clone: from https://github.com/Ihssane-12/gestion-des-tournois.git

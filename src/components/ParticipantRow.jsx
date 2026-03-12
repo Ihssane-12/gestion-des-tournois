@@ -13,7 +13,8 @@ function ParticipantRow(props) {
     dotClass = 'bg-emerald-500';
   }
 
-  let avatarElement = <div className="h-full w-full bg-gradient-to-tr from-amber-400 via-rose-400 to-fuchsia-500" />;
+  let avatarElement = <div className="h-full w-full bg-gradient-to-tr from-amber-400 via-rose-400 to-fuchsia-500" />
+  ;//ila makanch avatar ghadi iban  gradient avatar
   if (player.avatar) {
     avatarElement = (
       <img
@@ -30,6 +31,7 @@ function ParticipantRow(props) {
   }
 
   let finalChipClass = "inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium " + chipClass;
+  //kanjam3O default  class + color class 
   let finalDotClass = "h-1.5 w-1.5 rounded-full " + dotClass;
 
   return (

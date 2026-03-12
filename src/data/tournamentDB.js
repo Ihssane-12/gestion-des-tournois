@@ -1,12 +1,10 @@
-// Copied from the remote file given by the teacher
-// No network call needed: the UI is always in sync with this source of truth.
 
 export const tournamentData = [
   {
     id: 't1',
     title: 'Shuttle Masters League',
     sport: 'Badminton',
-    status: 'On Going', // Utilisé pour la couleur du StatusBadge (ex: success/green)
+    status: 'On Going', // darnaha 3la 9bal couleur dyal status badge (ex: success/green)
     date: 'October 12, 2025',
     location: 'Badminton Hall 1',
     description:
@@ -25,7 +23,7 @@ export const tournamentData = [
     id: 't2',
     title: 'Hoops Championship',
     sport: 'Basketball',
-    status: 'Upcoming', // Utilisé pour la couleur du StatusBadge (ex: primary/blue)
+    status: 'Upcoming',
     date: 'November 2, 2025',
     location: 'Indoor Arena - Court A',
     description:
@@ -54,12 +52,13 @@ export const tournamentData = [
   },
 ]
 
-// Petite fonction async pour respecter US2 (loader) tout en évitant les erreurs réseau.
+
+// function 3la 9bal loader hadchi bach n evitiw les erreurs reseau
 export function fetchTournaments() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(tournamentData)
-    }, 600) // délai court pour afficher le Skeleton
+    }, 600) // wa9t sghir bzaff bach n affichiw  le Skeleton
   })
 }
 

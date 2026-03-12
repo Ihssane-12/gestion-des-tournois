@@ -8,7 +8,7 @@ import TournamentPage from './pages/TournamentPage'
 const SPORTS_FILTER_ALL = 'All'
 
 function matchTournamentTitle(tournament, query) {
-  const titleLower = tournament.title.toLowerCase();
+  const titleLower = tournament.title.toLowerCase();//bach search ikon case insensitive ya3ni kay9bal majuscul miniscil kaychofhom nafs lhaja
   return titleLower.includes(query);
 }
 
@@ -39,18 +39,19 @@ function App() {
   }, [])
 
   const sportsFilters = useMemo(() => {
-    const sports = new Set(tournaments.map((t) => t.sport));
-    return [SPORTS_FILTER_ALL, ...Array.from(sports)];
-  }, [tournaments]);
-
+    const sports = new Set(tournaments.map((t) => t.sport));//kayjib sports sans repitition
+    return [SPORTS_FILTER_ALL, ...Array.from(sports)];//kanraj3o array fiha les sports li 3ndi
+  }, [tournaments]);//hna depence kaykon 3ndi 3la hssab tournaments
+   
+  //hna l filter ghadi ikon 3ndna 3la hssab sport 
   const filteredTournaments = useMemo(() => {
     let bySport = filterBySport(
       tournaments,
-      selectedSport === SPORTS_FILTER_ALL ? null : selectedSport
+      selectedSport === SPORTS_FILTER_ALL ? null : selectedSport //ila kan selectedSport = All kan3tiwh null  bach iraja3 tous les tournaments.
     );
 
-    let filtered = bySport;
-    if (searchQuery.trim()) {
+    let filtered = bySport; //kanbdaw bnatija dyal sport filter
+    if (searchQuery.trim()) { //kanchof search wach fih chi haja   
       const q = searchQuery.toLowerCase();
       filtered = bySport.filter((t) => matchTournamentTitle(t, q));
     }

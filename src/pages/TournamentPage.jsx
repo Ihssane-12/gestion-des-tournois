@@ -1,74 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { fetchTournaments } from '../data/tournamentDB'
 import StatusBadge from '../components/StatusBadge'
 import TabSystem from '../components/TabSystem'
-import ParticipantRow from '../components/ParticipantRow'
-
-function TournamentHeader(props) {
-  const navigate = props.navigate;
-
-  return (
-    <header className="flex items-center justify-between px-4 mb-5">
-      <button
-        onClick={() => navigate(-1)}
-        className="h-9 w-9 rounded-full bg-primary-light/30 flex items-center justify-center text-white shadow-soft"
-      >
-        <i className="fa-solid fa-arrow-left" />
-      </button>
-      <p className="text-sm font-medium">Tournament</p>
-      <button className="h-9 w-9 rounded-full bg-primary-light/30 flex items-center justify-center text-white shadow-soft">
-        <i className="fa-solid fa-share-nodes" />
-      </button>
-    </header>
-  );
-}
-
-function TournamentBadges(props) {
-  const tournament = props.tournament;
-
-  return (
-    <div className="flex flex-wrap gap-3 text-xs text-indigo-100">
-      <div className="inline-flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
-        <i className="fa-solid fa-user-group text-[11px]" />
-        <span>
-          {tournament.participantsCount}{' '}
-          <span className="text-indigo-50">Participants</span>
-        </span>
-        <span className="ml-1.5 inline-block h-1 w-1 rounded-full bg-indigo-100/80" />
-        <span>{tournament.type}</span>
-      </div>
-      <div className="inline-flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
-        <i className="fa-solid fa-diagram-project text-[11px]" />
-        <span>{tournament.format}</span>
-      </div>
-      <div className="inline-flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
-        <i className="fa-regular fa-calendar text-[11px]" />
-        <span>{tournament.date}</span>
-      </div>
-      <div className="inline-flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
-        <i className="fa-solid fa-location-dot text-[11px]" />
-        <span>{tournament.location}</span>
-      </div>
-    </div>
-  );
-}
-
-function ParticipantListTab(props) {
-  const tournament = props.tournament;
-
-  return (
-    <div className="p-5">
-      <h3 className="text-sm font-semibold text-slate-900 mb-3">
-        Participants List ({tournament.participants.length})
-      </h3>
-      <div className="grid grid-cols-2 gap-3">
-        {tournament.participants.map((player) => (
-          <ParticipantRow key={player.id} player={player} />
-        ))}
-      </div>
-    </div>
-  );
-}
+import TournamentHeader from '../components/TournamentHeader'
+import TournamentBadges from '../components/TournamentBadges'
+import ParticipantListTab from '../components/ParticipantListTab'
+import InfoTab from '../components/InfoTab'
+import BracketTab from '../components/BracketTab'
 
 function TournamentLoading() {
   return (
@@ -104,42 +43,28 @@ function TournamentNotFound() {
   );
 }
 
-function InfoTab(props) {
-  const tournament = props.tournament;
-
-  return (
-    <div className="p-5 text-sm text-slate-700">
-      <p className="mb-4">{tournament.description}</p>
-    </div>
-  );
-}
-
-function BracketTab() {
-  return (
-    <div className="p-5 text-sm text-slate-700">
-      <p>Bracket visualization coming soon.</p>
-    </div>
-  );
-}
-
-function TabContent(props) {
-  const activeTab = props.activeTab;
-  const tournament = props.tournament;
-
-  if (activeTab === 'info') {
-    return <InfoTab tournament={tournament} />;
-  } else if (activeTab === 'participants') {
-    return <ParticipantListTab tournament={tournament} />;
-  } else if (activeTab === 'bracket') {
-    return <BracketTab />;
-  }
-  return null;
-}
-
-function TournamentPage({ tournaments, loading, error }) {
+function TournamentPage() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const [tournaments, setTournaments] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [activeTab, setActiveTab] = useState('participants')
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const data = await fetchTournaments()
+        setTournaments(data)
+      } catch (e) {
+        setError('Impossible de charger les tournois.')
+        console.error(e)
+      } finally {
+        setLoading(false)
+      }
+    }
+    load()
+  }, [])
 
   const tournament = tournaments.find((t) => String(t.id) === id)
 
@@ -153,6 +78,15 @@ function TournamentPage({ tournaments, loading, error }) {
 
   if (!tournament) {
     return <TournamentNotFound />;
+  }
+
+  let tabContent = null;
+  if (activeTab === 'info') {
+    tabContent = <InfoTab tournament={tournament} />;
+  } else if (activeTab === 'participants') {
+    tabContent = <ParticipantListTab tournament={tournament} />;
+  } else if (activeTab === 'bracket') {
+    tabContent = <BracketTab />;
   }
 
   return (
@@ -180,7 +114,7 @@ function TournamentPage({ tournaments, loading, error }) {
 
           <TabSystem activeTab={activeTab} onChange={setActiveTab} />
 
-          <TabContent activeTab={activeTab} tournament={tournament} />
+          {tabContent}
         </div>
       </div>
     </div>

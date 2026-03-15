@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { fetchTournaments } from '../data/tournamentDB'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import StatusBadge from '../components/StatusBadge'
 import TabSystem from '../components/TabSystem'
 import TournamentHeader from '../components/TournamentHeader'
@@ -9,76 +8,10 @@ import ParticipantListTab from '../components/ParticipantListTab'
 import InfoTab from '../components/InfoTab'
 import BracketTab from '../components/BracketTab'
 
-function TournamentLoading() {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-dark via-primary to-slate-900 text-slate-50">
-      <div className="max-w-md mx-auto pt-8 pb-24">
-        <div className="mx-4 bg-white/10 rounded-3xl p-5 animate-pulse border border-white/10 shadow-soft" />
-      </div>
-    </div>
-  );
-}
-
-function TournamentError(props) {
-  const error = props.error;
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-dark via-primary to-slate-900 text-slate-50">
-      <div className="max-w-md mx-auto pt-8 pb-24">
-        <div className="mx-4 bg-red-500/20 border border-red-400/60 text-sm text-red-50 px-4 py-3 rounded-2xl">
-          {error}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function TournamentNotFound() {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-dark via-primary to-slate-900 text-slate-50">
-      <div className="max-w-md mx-auto pt-8 pb-24">
-        <div className="mx-4 text-center text-sm text-slate-100 mt-10">Tournament not found.</div>
-      </div>
-    </div>
-  );
-}
-
-function TournamentPage() {
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const [tournaments, setTournaments] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+function TournamentPage(props) {
+  const tournament = props.tournament
   const [activeTab, setActiveTab] = useState('participants')
-
-  useEffect(() => {
-    async function load() {
-      try {
-        const data = await fetchTournaments()
-        setTournaments(data)
-      } catch (e) {
-        setError('Impossible de charger les tournois.')
-        console.error(e)
-      } finally {
-        setLoading(false)
-      }
-    }
-    load()
-  }, [])
-
-  const tournament = tournaments.find((t) => String(t.id) === id)
-
-  if (loading) {
-    return <TournamentLoading />;
-  }
-
-  if (error) {
-    return <TournamentError error={error} />;
-  }
-
-  if (!tournament) {
-    return <TournamentNotFound />;
-  }
+  const navigate = useNavigate()
 
   let tabContent = null;
   if (activeTab === 'info') {

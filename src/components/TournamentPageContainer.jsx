@@ -3,12 +3,16 @@ import { useParams } from 'react-router-dom'
 import { fetchTournaments } from '../data/tournamentDB'
 import { TournamentLoading, TournamentError, TournamentNotFound } from './TournamentPageStates'
 import TournamentPage from '../pages/TournamentPage'
+import { useUser } from '../context/UserContext'
+import { getDisplayTournament } from '../services/displayTournament'
 
 function TournamentPageContainer() {
   const { id } = useParams()
   const [tournaments, setTournaments] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  
+  const { userProfile, isRegistered } = useUser()
 
   useEffect(() => {
     async function load() {
@@ -25,7 +29,7 @@ function TournamentPageContainer() {
     load()
   }, [])
 
-  const tournament = tournaments.find((t) => String(t.id) === id)
+  const baseTournament = tournaments.find((t) => String(t.id) === id)
 
   if (loading) {
     return <TournamentLoading />;
@@ -35,9 +39,11 @@ function TournamentPageContainer() {
     return <TournamentError error={error} />;
   }
 
-  if (!tournament) {
+  if (!baseTournament) {
     return <TournamentNotFound />;
   }
+
+  const tournament = getDisplayTournament(baseTournament, userProfile, isRegistered(baseTournament.id))
 
   return <TournamentPage tournament={tournament} />;
 }

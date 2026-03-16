@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
-import HomePageContainer from './pages/HomePageContainer'
-import TournamentPageContainer from './pages/TournamentPageContainer'
+import HomePageContainer from './components/HomePageContainer'
+import TournamentPageContainer from './components/TournamentPageContainer'
 
 function App() {
   return (

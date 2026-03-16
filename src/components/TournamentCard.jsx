@@ -1,4 +1,5 @@
 import StatusBadge from './StatusBadge'
+import RegisterButton from './RegisterButton'
 
 function TournamentCardDetails(props) {
   const tournament = props.tournament;
@@ -60,18 +61,33 @@ function TournamentCard(props) {
     cardClass += "border-white/70 shadow-sm hover:border-white hover:shadow-soft";
   }
 
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onSelect()
+    }
+  }
+
   return (
-    <button
-      type="button"
-      onClick={onSelect}
-      className={cardClass}
-    >
-      <TournamentCardHeader tournament={tournament} />
+    <div className={cardClass}>
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={onSelect}
+        onKeyDown={handleKeyDown}
+        className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-inset rounded-2xl"
+      >
+        <TournamentCardHeader tournament={tournament} />
 
-      <p className="text-xs text-slate-600 mb-4 line-clamp-2">{tournament.description}</p>
+        <p className="text-xs text-slate-600 mb-4 line-clamp-2">{tournament.description}</p>
 
-      <TournamentCardDetails tournament={tournament} />
-    </button>
+        <TournamentCardDetails tournament={tournament} />
+      </div>
+
+      <div className="flex justify-end mt-3 pt-3 border-t border-slate-100">
+        <RegisterButton tournamentId={tournament.id} />
+      </div>
+    </div>
   )
 }
 
